@@ -29,6 +29,9 @@ public abstract class GenericDao<T, I extends Serializable> implements IGenericS
 		this.persistedClass = persistedClass;
 	}
 
+	/**
+	 * Salvar Um entidade
+	 */
 	public T salvar(@Valid T entity) {
 		EntityTransaction t = iniciarTransacao();
 		entityManager.persist(entity);
