@@ -6,9 +6,12 @@
 	<groupId>com.stefanini</groupId>
 	<artifactId>jpaexample</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
 
 	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<version.org.hibernate>5.4.12.Final</version.org.hibernate>
+		<version.org.hibernate.validator>6.1.2.Final</version.org.hibernate.validator>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
 	</properties>
@@ -44,9 +47,21 @@
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-validator</artifactId>
-			<version>6.1.2.Final</version>
+			<version>${version.org.hibernate.validator}</version>
+
 		</dependency>
 
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator-cdi</artifactId>
+			<version>${version.org.hibernate.validator}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.glassfish</groupId>
+			<artifactId>javax.el</artifactId>
+			<version>3.0.1-b11</version>
+		</dependency>
 		<!--Testes Unitarios -->
 		<dependency>
 			<groupId>junit</groupId>
@@ -55,6 +70,19 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.8.1</version>
+				<configuration>
+					<source>${maven.compiler.source}</source>
+
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 
 
 </project>
