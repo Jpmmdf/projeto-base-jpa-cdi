@@ -2,6 +2,7 @@ package com.stefanini.util;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -15,16 +16,29 @@ public interface IGenericService<T, I extends Serializable> {
 	T salvar(@Valid T entity);
 
 	/**
-	 * 
+	 * Atualizar uma entidade
 	 * @param entity
 	 * @return
 	 */
 	T atualizar(@Valid T entity);
 
+	/**
+	 *  Remover uma entidade
+	 * @param id
+	 */
 	void remover(I id);
 
-	List<T> getList();
+	/**
+	 * Obter uma Lista
+	 * @return
+	 */
+	Optional<List<T>> getList();
 
-	T encontrar(I id);
+	/**
+	 * Encontar um registro pelo id
+	 * @param id
+	 * @return
+	 */
+	Optional<T> encontrar(I id);
 
 }
