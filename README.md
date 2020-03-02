@@ -1,6 +1,7 @@
 # Treinamento Stefanini
 
 Nessa primeira fase do Treinamento serão abordados os assuntos relacionadosa a:
+
 Slides disponiveis em [Slides](https://github.com/Jpmmdf/projeto-base-jpa-cdi/blob/master/src/main/resources/Treinamento-2.pptx)
 * Ferramentas para Desenvolvimento
 * GIT
