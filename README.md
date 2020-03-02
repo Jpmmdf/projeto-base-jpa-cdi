@@ -2,6 +2,9 @@
 
 Nessa primeira fase do Treinamento serão abordados os assuntos relacionadosa a:
 * Ferramentas para Desenvolvimento
+* GIT
+   * Clonar Projeto
+   * Executar os comandos Pull/Push/Add/Commit
 * JAVA
     * Objetos e Variaveis
     * Mapeamento de Entidades
