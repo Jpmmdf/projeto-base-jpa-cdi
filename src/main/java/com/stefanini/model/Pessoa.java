@@ -51,7 +51,7 @@ public class Pessoa implements Serializable{
 	@NotNull
 	@Column(name = "ST_PESSOA")
 	private Boolean situacao;
-	
+
 
 	@OneToMany(mappedBy= "pessoa")
 	private Set<Endereco> enderecos;

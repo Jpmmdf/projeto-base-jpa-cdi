@@ -34,18 +34,18 @@ Após a configuração do ambiente, clonar esse projeto e importa-lo como Maven 
 
 ## Desafio para a aula 2
 
+* Sugestoes do Colega: Francisco
+
 Mapear as entidades restantes contidadas no arquivo 
 
 ./src/main/resources/db.sql
 
-Alterar o método que retorna umas lista para receber filtros como parâmetro 
+Criar um Metodo na Dao de Pessoa para que seja possivel retorna uma lista de Pessoa com base em filtros
 
 ~~~java
-public Optional<List<T>> getList() {
-    CriteriaBuilder builder = getEntityManager().getCriteriaBuilder();
-    CriteriaQuery<T> query = builder.createQuery(classe);
-    query.from(classe);
-    return Optional.of(getEntityManager().createQuery(query).getResultList());
+public List<Pessoa> getList(FiltroPessoa filtro) {
+    //Retornar uma Lista de Pessoa com base no filtro
+    return ;
 }
 ~~~
  

@@ -84,7 +84,7 @@ public abstract class GenericDao<T, I extends Serializable> implements IGenericS
 	 * Não precisa de Transacao para efetuar DQL
 	 */
 	public Optional<T> encontrar(I id) {
-		return Optional.of(getEntityManager().find(classe, id));
+		return Optional.ofNullable(getEntityManager().find(classe, id));
 	}
 	
 	
