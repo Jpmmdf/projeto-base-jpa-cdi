@@ -49,6 +49,7 @@ public class App {
 	private void buscarTodos() {
 		servico.getList().ifPresent(i -> {
 			i.forEach(b -> {
+				System.out.println(b.getEnderecos());
 				System.out.println(b);
 			});
 		});

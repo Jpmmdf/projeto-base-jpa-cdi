@@ -1,15 +1,10 @@
 package com.stefanini.model;
 
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDate;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
+import java.util.Set;
 
 /**
  * @author joaopedromilhome
@@ -56,14 +51,18 @@ public class Pessoa implements Serializable{
 	@NotNull
 	@Column(name = "ST_PESSOA")
 	private Boolean situacao;
+	
 
+	@OneToMany(mappedBy= "pessoa")
+	private Set<Endereco> enderecos;
 	/**
 	 * Metodo construtor da classe
 	 */
 	public Pessoa() {
 	}
 
-	
+
+
 
 	/**
 	 * Construtor da Classe, Obrigando receber todos os parametros
@@ -80,6 +79,14 @@ public class Pessoa implements Serializable{
 		this.situacao = situacao;
 	}
 
+
+	public Set<Endereco> getEnderecos() {
+		return enderecos;
+	}
+
+	public void setEnderecos(Set<Endereco> enderecos) {
+		this.enderecos = enderecos;
+	}
 
 
 	public Long getId() {
