@@ -12,6 +12,12 @@ import java.util.Set;
  */
 @Entity
 @Table(name = "TB_PESSOA")
+@NamedQueries(value = {
+		@NamedQuery(name = "Pessoa.findByNome",
+				query = "select p from Pessoa p where p.nome=:nome"),
+		@NamedQuery(name = "Pessoa.findPerfilsAndEnderecosByNome",
+				query = "select  p from Pessoa p  join p.perfils join p.enderecos where p.nome=:nome")
+})
 public class Pessoa implements Serializable{
 
 	
@@ -52,9 +58,23 @@ public class Pessoa implements Serializable{
 	@Column(name = "ST_PESSOA")
 	private Boolean situacao;
 
-
-	@OneToMany(mappedBy= "pessoa")
+	/**
+	 * Mapeamento de Enderecos Unidirecional
+	 */
+	@OneToMany(fetch = FetchType.EAGER)
+	@JoinColumn(name = "CO_SEQ_PESSOA",referencedColumnName = "CO_SEQ_PESSOA")
 	private Set<Endereco> enderecos;
+
+	/**
+	 * Mapeamento de Perfis Unidirecional
+	 */
+	@ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+	@JoinTable(
+			name = "TB_PESSOA_PERFIL",
+			joinColumns = {@JoinColumn(name = "CO_SEQ_PESSOA")},
+			inverseJoinColumns = {@JoinColumn(name = "CO_SEQ_PERFIL")}
+	)
+	private Set<Perfil> perfils;
 	/**
 	 * Metodo construtor da classe
 	 */
@@ -62,7 +82,13 @@ public class Pessoa implements Serializable{
 	}
 
 
+	public Set<Perfil> getPerfils() {
+		return perfils;
+	}
 
+	public void setPerfils(Set<Perfil> perfils) {
+		this.perfils = perfils;
+	}
 
 	/**
 	 * Construtor da Classe, Obrigando receber todos os parametros

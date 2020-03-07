@@ -1,14 +1,13 @@
 package com.stefanini.servico;
 
-import java.util.List;
-import java.util.Optional;
-
-import javax.inject.Inject;
-import javax.validation.Valid;
-
 import com.stefanini.dao.PessoaDao;
 import com.stefanini.model.Pessoa;
 import com.stefanini.util.IGenericService;
+
+import javax.inject.Inject;
+import javax.validation.Valid;
+import java.util.List;
+import java.util.Optional;
 
 /**
  * 

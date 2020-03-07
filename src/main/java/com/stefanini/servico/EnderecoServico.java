@@ -1,9 +1,7 @@
 package com.stefanini.servico;
 
 import com.stefanini.dao.EnderecoDao;
-import com.stefanini.dao.PessoaDao;
 import com.stefanini.model.Endereco;
-import com.stefanini.model.Pessoa;
 import com.stefanini.util.IGenericService;
 
 import javax.inject.Inject;

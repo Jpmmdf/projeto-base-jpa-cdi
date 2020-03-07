@@ -1,14 +1,5 @@
 package com.stefanini.model;
 
-import java.util.Set;
-
-import javax.persistence.TypedQuery;
-import javax.persistence.criteria.*;
-import javax.validation.ConstraintViolation;
-import javax.validation.Validation;
-import javax.validation.Validator;
-import javax.validation.ValidatorFactory;
-
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
@@ -18,7 +9,18 @@ import org.hibernate.query.Query;
 import org.junit.Before;
 import org.junit.Test;
 
-public class PessoaTest {
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.ParameterExpression;
+import javax.persistence.criteria.Root;
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
+import java.util.Set;
+
+public class PerfilTest {
 
     private Validator validator;
     private SessionFactory factoryJpa;
@@ -73,7 +75,7 @@ public class PessoaTest {
      */
     private Pessoa findBuscarPessoaUsandoNameQuery(Session session, String name) {
         TypedQuery<Pessoa> q2 =
-                session.createNamedQuery("Pessoa.findByNome", Pessoa.class);
+                session.createNamedQuery("Pessoa.findPerfilsAndEnderecosByNome", Pessoa.class);
         q2.setParameter("nome", name);
         Pessoa person = q2.getSingleResult();
         return person;

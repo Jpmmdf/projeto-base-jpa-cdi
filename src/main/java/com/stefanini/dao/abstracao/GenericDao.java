@@ -1,8 +1,6 @@
 package com.stefanini.dao.abstracao;
 
-import java.io.Serializable;
-import java.util.List;
-import java.util.Optional;
+import com.stefanini.util.IGenericService;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
@@ -10,8 +8,9 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.validation.Valid;
-
-import com.stefanini.util.IGenericService;
+import java.io.Serializable;
+import java.util.List;
+import java.util.Optional;
 
 /**
  * @author joaopedromilhome

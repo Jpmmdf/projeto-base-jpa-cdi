@@ -1,14 +1,12 @@
 package com.stefanini.teste;
 
-import java.time.LocalDate;
-import java.util.Optional;
+import com.stefanini.model.Pessoa;
+import com.stefanini.servico.PessoaServico;
 
 import javax.enterprise.inject.se.SeContainer;
 import javax.enterprise.inject.se.SeContainerInitializer;
 import javax.inject.Inject;
-
-import com.stefanini.model.Pessoa;
-import com.stefanini.servico.PessoaServico;
+import java.util.Optional;
 
 public class App {
 

@@ -2,7 +2,6 @@ package com.stefanini.dao;
 
 import com.stefanini.dao.abstracao.GenericDao;
 import com.stefanini.model.Endereco;
-import com.stefanini.model.Pessoa;
 
 /**
  * O Unico objetivo da Dao 
