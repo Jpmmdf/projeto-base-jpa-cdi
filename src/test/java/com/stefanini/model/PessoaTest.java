@@ -200,7 +200,7 @@ public class PessoaTest {
     /**
      * EFETUAR A BUSCAR COM NameQuery
      */
-    @Test()
+    @Test
     public void findBuscarPessoaUsandoNameQuery() {
         try (Session session = factoryJpa.openSession()) {
             Pessoa pessoa1 = findBuscarPessoaUsandoNameQuery(session, nome);

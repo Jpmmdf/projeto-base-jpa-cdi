@@ -19,6 +19,9 @@ public class PessoaPerfil implements Serializable {
     @JoinColumn(name = "co_seq_pessoa", referencedColumnName = "co_seq_pessoa", nullable = false)
     private Pessoa pessoa;
 
+    public PessoaPerfil() {
+		// TODO Auto-generated constructor stub
+	}
 
     public PessoaPerfil(Perfil perfil, Pessoa pessoa) {
         this.perfil = perfil;
