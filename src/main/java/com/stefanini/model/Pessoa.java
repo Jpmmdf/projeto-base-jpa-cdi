@@ -16,7 +16,7 @@ import java.util.Set;
 		@NamedQuery(name = "Pessoa.findByNome",
 				query = "select p from Pessoa p where p.nome=:nome"),
 		@NamedQuery(name = "Pessoa.findPerfilsAndEnderecosByNome",
-				query = "select  p from Pessoa p  join p.perfils join p.enderecos where p.nome=:nome")
+				query = "select  p from Pessoa p  JOIN FETCH p.perfils perfil JOIN FETCH p.enderecos enderecos where p.nome=:nome")
 })
 public class Pessoa implements Serializable{
 
@@ -61,14 +61,14 @@ public class Pessoa implements Serializable{
 	/**
 	 * Mapeamento de Enderecos Unidirecional
 	 */
-	@OneToMany(fetch = FetchType.EAGER)
+	@OneToMany(fetch = FetchType.LAZY)
 	@JoinColumn(name = "CO_SEQ_PESSOA",referencedColumnName = "CO_SEQ_PESSOA")
 	private Set<Endereco> enderecos;
 
 	/**
 	 * Mapeamento de Perfis Unidirecional
 	 */
-	@ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+	@ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
 	@JoinTable(
 			name = "TB_PESSOA_PERFIL",
 			joinColumns = {@JoinColumn(name = "CO_SEQ_PESSOA")},

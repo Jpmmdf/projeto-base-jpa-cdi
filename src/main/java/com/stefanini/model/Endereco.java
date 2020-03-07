@@ -116,4 +116,18 @@ public class Endereco implements Serializable {
     public void setIdPessoa(Long idPessoa) {
         this.idPessoa = idPessoa;
     }
+
+    @Override
+    public String toString() {
+        return "Endereco{" +
+                "id=" + id +
+                ", cep='" + cep + '\'' +
+                ", uf='" + uf + '\'' +
+                ", localidade='" + localidade + '\'' +
+                ", bairro='" + bairro + '\'' +
+                ", complemento='" + complemento + '\'' +
+                ", logradouro='" + logradouro + '\'' +
+                ", idPessoa=" + idPessoa +
+                '}';
+    }
 }
