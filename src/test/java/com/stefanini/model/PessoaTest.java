@@ -11,10 +11,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import javax.persistence.TypedQuery;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.ParameterExpression;
-import javax.persistence.criteria.Root;
+import javax.persistence.criteria.*;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
@@ -181,8 +178,16 @@ public class PessoaTest {
         CriteriaQuery<Long> q = cb.createQuery(Long.class);
         Root<Pessoa> entityRoot = q.from(Pessoa.class);
         q.select(cb.count(entityRoot));
+        Join<Pessoa, Perfil> join = entityRoot.join("perfils");
+
+        Root<Perfil> perfilRoot = q.from(Perfil.class);
+
         ParameterExpression<String> p = cb.parameter(String.class);
-        q.where(cb.equal(entityRoot.get("nome"), name));
+        q.where(cb.equal(perfilRoot.get("nome"), "ADMIN"));
+//        
+//        ParameterExpression<String> p1 = cb.parameter(String.class);
+//        q.where(cb.equal(entityRoot.get("nome"), name));
+//
         System.out.println("QUERY : " + session.createQuery(q).getQueryString());
         return session.createQuery(q).getSingleResult();
     }
