@@ -164,7 +164,7 @@ public class PessoaTest {
         Root<Pessoa> entityRoot = q.from(Pessoa.class);
         q.select(entityRoot);
         ParameterExpression<String> p = cb.parameter(String.class);
-        q.where(cb.equal(entityRoot.get("nome"), name));
+        q.where(cb.like(entityRoot.get("nome"), name));
         return session.createQuery(q).getSingleResult();
     }
 
@@ -195,7 +195,9 @@ public class PessoaTest {
     @Test
     public void PessoaComQuery() {
         try (Session session = factoryJpa.openSession()) {
-            Pessoa pessoa1 = findPessoaAntigo(session, nome);
+            System.out.println("Nome: "+nome);
+
+            Pessoa pessoa1 = findPessoaAntigo(session, "JJJ");
             System.out.println("Antigo: " + pessoa1);
         }
     }
@@ -207,7 +209,7 @@ public class PessoaTest {
     @Test
     public void PessoaComTypedQuery() {
         try (Session session = factoryJpa.openSession()) {
-            Pessoa pessoa1 = findPessoaNovo(session, nome);
+            Pessoa pessoa1 = findPessoaNovo(session, "");
             System.out.println("Novo: " + pessoa1);
         }
     }
@@ -243,7 +245,7 @@ public class PessoaTest {
     public void findPessoaCriteria() {
         try (Session session = factoryJpa.openSession()) {
             Pessoa pessoa1 = findPessoaCriteria(session, nome);
-            System.out.println("Perfils: " +pessoa1.getPerfils());
+//            System.out.println("Perfils: " +pessoa1.getPerfils());
             System.out.println("Novo: " + pessoa1);
         }
     }
@@ -255,7 +257,7 @@ public class PessoaTest {
     @Test()
     public void findPessoaStream() {
         try (Session session = factoryJpa.openSession()) {
-            Stream<Pessoa> pessoaUsandoNameQueryComStream = findPessoaUsandoNameQueryComStream(session, nome);
+            Stream<Pessoa> pessoaUsandoNameQueryComStream = findPessoaUsandoNameQueryComStream(session, "");
             pessoaUsandoNameQueryComStream.forEach(System.out::println);
         }
     }

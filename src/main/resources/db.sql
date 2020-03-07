@@ -92,3 +92,8 @@ insert into tb_pessoa_perfil(co_seq_pessoa, co_seq_perfil) VALUES ((select co_se
 
 INSERT INTO public.tb_endereco (co_seq_endereco, co_seq_pessoa, ds_logradouro, ds_complemento, ds_bairro, ds_cidade, co_uf, ds_cep)
 VALUES (DEFAULT, (select co_seq_pessoa from tb_pessoa where no_nome = 'JOAO'), 'Gemétris Chácara 3', 'CASA X', 'Vicente Pires', 'Brasília', 'DF', '72001100');
+INSERT INTO public.tb_endereco (co_seq_endereco, co_seq_pessoa, ds_logradouro, ds_complemento, ds_bairro, ds_cidade, co_uf, ds_cep)
+VALUES (DEFAULT, (select co_seq_pessoa from tb_pessoa where no_nome = 'JOAO'), 'Gemétris Chácara 3', 'CASA X', 'Vicente Pires', 'Brasília', 'DF', '72001100');
+
+INSERT INTO public.tb_endereco (co_seq_endereco, co_seq_pessoa, ds_logradouro, ds_complemento, ds_bairro, ds_cidade, co_uf, ds_cep)
+VALUES (DEFAULT, (select co_seq_pessoa from tb_pessoa where no_nome = 'JOAO'), 'Gemétris Chácara 3', 'CASA X', 'Vicente Pires', 'Brasília', 'SP', '72001100');
