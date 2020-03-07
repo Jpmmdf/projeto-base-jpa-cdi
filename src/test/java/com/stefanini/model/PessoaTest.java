@@ -26,6 +26,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.Set;
+import java.util.stream.Stream;
 
 public class PessoaTest {
 
@@ -77,7 +78,7 @@ public class PessoaTest {
      * @param name
      * @return
      */
-    private Pessoa findBuscarPessoaAntigo(Session session, String name) {
+    private Pessoa findPessoaAntigo(Session session, String name) {
         Query<Pessoa> query = session.createQuery("select p from Pessoa p where p.nome=:nome");
         query.setParameter("nome", name);
         Pessoa person = query.uniqueResult();
@@ -92,13 +93,28 @@ public class PessoaTest {
      * @param name
      * @return
      */
-    private Pessoa findBuscarPessoaNovo(Session session, String name) {
+    private Pessoa findPessoaNovo(Session session, String name) {
         TypedQuery<Pessoa> q2 =
                 session.createQuery(" select p from Pessoa p where p.nome=:nome", Pessoa.class);
         q2.setParameter("nome", name);
         Pessoa person = q2.getSingleResult();
         return person;
     }
+
+    /**
+     * JPA 2.2
+     *
+     * @param session
+     * @param name
+     * @return
+     */
+    private Stream<Pessoa> findPessoaUsandoNameQueryComStream(Session session, String name) {
+        TypedQuery<Pessoa> q2 =
+                session.createQuery(" select p from Pessoa p where p.nome=:nome", Pessoa.class);
+        q2.setParameter("nome", name);
+        return q2.getResultStream();
+    }
+
 
     /**
      * Buscando uma Pessoa do Modo novo
@@ -108,7 +124,7 @@ public class PessoaTest {
      * @param name
      * @return
      */
-    private Pessoa findBuscarPessoaUsandoNameQuery(Session session, String name) {
+    private Pessoa findPessoaUsandoNameQuery(Session session, String name) {
         TypedQuery<Pessoa> q2 =
                 session.createNamedQuery("Pessoa.findPerfilsAndEnderecosByNome", Pessoa.class);
         q2.setParameter("nome", name);
@@ -125,7 +141,7 @@ public class PessoaTest {
      * @param name
      * @return
      */
-    private Pessoa findBuscarPessoaUsandoNativeQuery(Session session, String name) {
+    private Pessoa findPessoaUsandoNativeQuery(Session session, String name) {
         TypedQuery<Pessoa> q2 =
                 session.createNativeQuery("select * from TB_PESSOA where NO_NOME =:name", Pessoa.class);
         q2.setParameter("name", name);
@@ -142,14 +158,13 @@ public class PessoaTest {
      * @param name
      * @return
      */
-    private Pessoa findBuscarPessoaCriteria(Session session, String name) {
+    private Pessoa findPessoaCriteria(Session session, String name) {
         CriteriaBuilder cb = session.getCriteriaBuilder();
         CriteriaQuery<Pessoa> q = cb.createQuery(Pessoa.class);
         Root<Pessoa> entityRoot = q.from(Pessoa.class);
         q.select(entityRoot);
         ParameterExpression<String> p = cb.parameter(String.class);
         q.where(cb.equal(entityRoot.get("nome"), name));
-//        System.out.println();
         return session.createQuery(q).getSingleResult();
     }
 
@@ -174,36 +189,36 @@ public class PessoaTest {
 
 
     /**
-     * EFETUAR A BUSCAR COM QUERY
+     * EFETUAR A  COM QUERY
      * QUANDO NÃO POSSUI VALOR RETORNO NULL
      */
     @Test
-    public void buscarPessoaComQuery() {
+    public void PessoaComQuery() {
         try (Session session = factoryJpa.openSession()) {
-            Pessoa pessoa1 = findBuscarPessoaAntigo(session, nome);
+            Pessoa pessoa1 = findPessoaAntigo(session, nome);
             System.out.println("Antigo: " + pessoa1);
         }
     }
 
     /**
-     * EFETUAR A BUSCAR COM TYPEDQUERY
+     * EFETUAR A  COM TYPEDQUERY
      * QUANDO NÃO POSSUI LANCA UMA NoResultException
      */
     @Test
-    public void buscarPessoaComTypedQuery() {
+    public void PessoaComTypedQuery() {
         try (Session session = factoryJpa.openSession()) {
-            Pessoa pessoa1 = findBuscarPessoaNovo(session, nome);
+            Pessoa pessoa1 = findPessoaNovo(session, nome);
             System.out.println("Novo: " + pessoa1);
         }
     }
 
     /**
-     * EFETUAR A BUSCAR COM NameQuery
+     * EFETUAR A  COM NameQuery
      */
     @Test
-    public void findBuscarPessoaUsandoNameQuery() {
+    public void findPessoaUsandoNameQuery() {
         try (Session session = factoryJpa.openSession()) {
-            Pessoa pessoa1 = findBuscarPessoaUsandoNameQuery(session, nome);
+            Pessoa pessoa1 = findPessoaUsandoNameQuery(session, nome);
             System.out.println("Perfils :" +pessoa1.getPerfils());
             System.out.println("Endereco "+pessoa1.getEnderecos());
             System.out.println("Novo: " + pessoa1);
@@ -211,23 +226,23 @@ public class PessoaTest {
     }
 
     /**
-     * EFETUAR A BUSCAR COM NameQuery
+     * EFETUAR A  COM NameQuery
      */
     @Test()
-    public void findBuscarPessoaUsandoNativeQuery() {
+    public void findPessoaUsandoNativeQuery() {
         try (Session session = factoryJpa.openSession()) {
-            Pessoa pessoa1 = findBuscarPessoaUsandoNativeQuery(session, nome);
+            Pessoa pessoa1 = findPessoaUsandoNativeQuery(session, nome);
             System.out.println("Novo: " + pessoa1);
         }
     }
 
     /**
-     * EFETUAR A BUSCAR COM NameQuery
+     * EFETUAR A  COM NameQuery
      */
     @Test()
-    public void findBuscarPessoaCriteria() {
+    public void findPessoaCriteria() {
         try (Session session = factoryJpa.openSession()) {
-            Pessoa pessoa1 = findBuscarPessoaCriteria(session, nome);
+            Pessoa pessoa1 = findPessoaCriteria(session, nome);
             System.out.println("Perfils: " +pessoa1.getPerfils());
             System.out.println("Novo: " + pessoa1);
         }
@@ -235,7 +250,18 @@ public class PessoaTest {
 
 
     /**
-     * EFETUAR A BUSCAR COM NameQuery
+     * EFETUAR A  COM NameQuery
+     */
+    @Test()
+    public void findPessoaStream() {
+        try (Session session = factoryJpa.openSession()) {
+            Stream<Pessoa> pessoaUsandoNameQueryComStream = findPessoaUsandoNameQueryComStream(session, nome);
+            pessoaUsandoNameQueryComStream.forEach(System.out::println);
+        }
+    }
+
+    /**
+     * EFETUAR A  COM NameQuery
      */
     @Test()
     public void findCountPessoa() {
