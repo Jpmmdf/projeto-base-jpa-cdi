@@ -10,7 +10,7 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<version.org.hibernate>5.4.12.Final</version.org.hibernate>
+		<version.org.hibernate>5.4.24.Final</version.org.hibernate>
 		<version.org.hibernate.validator>6.1.2.Final</version.org.hibernate.validator>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
